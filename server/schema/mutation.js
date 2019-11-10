@@ -1,6 +1,7 @@
 const graphql = require('graphql');
-const { GraphQLObjectType, GraphQLString, GraphQLID } = graphql;
+const { GraphQLObjectType, GraphQLString, GraphQLID , GraphQLNonNull} = graphql;
 const CourseType = require('./courseType');
+const axios = require('axios');
 
 const mutation = new GraphQLObjectType({
   name: 'Mutation',
@@ -8,10 +9,10 @@ const mutation = new GraphQLObjectType({
     addCourse: {
       type: CourseType,
       args: {
-        title: { type: GraphQLString }
+        title: {type: new GraphQLNonNull(GraphQLString) }
       },
       resolve(parentValue, { title }) {
-        return { "id": 1, "title": "Course 1", "instructorId": 1, "studentIds" : [2,3,4] }
+        return axios.post("http://localhost:3000/courses", {title}).then(res => res.data);;
       }
     }
   }
