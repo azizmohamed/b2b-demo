@@ -2,6 +2,7 @@ const graphql = require('graphql');
 const { GraphQLObjectType, GraphQLList, GraphQLID, GraphQLString } = graphql;
 const EmployeeType = require('./employeeType');
 const axios = require('axios');
+const _ = require('lodash');
 
 const CourseType = new GraphQLObjectType({
     name:  'CourseType',

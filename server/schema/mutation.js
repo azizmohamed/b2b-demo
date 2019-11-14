@@ -9,10 +9,11 @@ const mutation = new GraphQLObjectType({
     addCourse: {
       type: CourseType,
       args: {
-        title: {type: new GraphQLNonNull(GraphQLString) }
+        title: {type: new GraphQLNonNull(GraphQLString) },
+        instructorId: {type: new GraphQLNonNull(GraphQLString) }
       },
-      resolve(parentValue, { title }) {
-        return axios.post("http://localhost:3000/courses", {title}).then(res => res.data);;
+      resolve(parentValue, { title, instructorId }) {
+        return axios.post("http://localhost:3000/courses", {title, instructorId}).then(res => res.data);;
       }
     }
   }
